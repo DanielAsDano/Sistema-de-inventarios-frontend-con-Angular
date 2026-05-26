@@ -4,8 +4,7 @@ import { ProductoListaComponent } from "./producto-lista/producto-lista.componen
 @Component({
   selector: 'app-root',
   imports: [ProductoListaComponent], 
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   title = 'inventario-app';
