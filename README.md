@@ -1,59 +1,158 @@
-# InventarioApp
+# 📦 Sistema de Control de Inventarios — Frontend Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.6.
+¡Bienvenido al frontend del **Sistema de Control de Inventarios**! Una aplicación web moderna de estilo SaaS diseñada para la gestión, monitoreo y control en tiempo real de productos, stock y métricas financieras de inventarios.
 
-## Development server
+Este proyecto ha sido desarrollado utilizando **Angular 19** y estilizado meticulosamente con **Bootstrap 5** y **CSS personalizado**, logrando una interfaz responsiva, fluida y con un aspecto sumamente premium.
 
-To start a local development server, run:
+---
+
+## ✨ Características Principales
+
+*   **📊 Métricas en Tiempo Real (SaaS Dashboard):** Tarjetas dinámicas que resumen los indicadores clave del almacén al instante:
+    *   *Total de productos diferentes* registrados.
+    *   *Stock total de existencias* acumuladas en el almacén.
+    *   *Valor total financiero del inventario*, calculado automáticamente de forma dinámica.
+*   **🎨 Tema Dinámico (Modo Oscuro / Claro):** Interruptor de tema integrado que interactúa con las variables globales de Bootstrap (`data-bs-theme`). Detecta automáticamente la preferencia del sistema operativo y persiste la selección del usuario mediante `localStorage`.
+*   **🚥 Alertas de Disponibilidad (Badges de Stock):** Indicadores visuales automáticos basados en la cantidad de existencias:
+    *   🔴 `Agotado` (0 unidades)
+    *   🟡 `Stock Bajo` (< 10 unidades)
+    *   🔵 `Moderado` (10 - 49 unidades)
+    *   🟢 `Stock Alto` (≥ 50 unidades)
+*   **💼 Gestión Completa (CRUD de Productos):**
+    *   **Listado general:** Vista ordenada de productos con diseño limpio, íconos y transiciones fluidas.
+    *   **Registro fácil:** Formulario de registro de nuevos productos con validaciones básicas.
+    *   **Edición rápida:** Actualización de descripciones, precios o existencias.
+    *   **Eliminación segura:** Retirada de productos obsoletos con actualización de métricas en caliente.
+*   **✨ Estética SaaS Premium y Animaciones:**
+    *   Diseño moderno usando la tipografía premium **Plus Jakarta Sans**.
+    *   Barra de navegación flotante con efecto **Glassmorphic** (desenfoque de fondo y bordes semitransparentes).
+    *   Entradas animadas de cascada (`fade-in-up`) para los elementos de la tabla y las tarjetas métricas.
+    *   Efectos hover pulidos en todos los botones y filas de tablas para mayor retroalimentación táctil.
+
+---
+
+## 🛠️ Tecnologías y Herramientas
+
+### Frontend
+*   **Core:** [Angular v19.1.6](https://angular.dev/)
+*   **Lenguajes:** TypeScript, HTML5, CSS3
+*   **Maquetación y Estilos:** 
+    *   [Bootstrap v5.3.3](https://getbootstrap.com/) (Sistema de rejilla, utilidades y tema base)
+    *   [Bootstrap Icons v1.11.3](https://icons.getbootstrap.com/) (Íconos vectoriales modernos)
+    *   **CSS Custom Properties (Variables CSS):** Sistema de diseño global para colores HSL dinámicos en temas claro y oscuro.
+*   **Tipografía:** [Plus Jakarta Sans](https://fonts.google.com/specimen/Plus+Jakarta+Sans) vía Google Fonts.
+*   **Manejo de Estado y Asincronía:** RxJS (Observables) y `HttpClient` para peticiones REST de alto rendimiento.
+
+### Backend sugerido (Integración)
+La aplicación está configurada para conectarse de forma nativa con un backend REST API desarrollado en **Java / Spring Boot** que expone la entidad `Producto`.
+
+---
+
+## 📂 Estructura del Proyecto Frontend
+
+A continuación se muestra la organización de las piezas clave dentro del directorio `src/app/`:
 
 ```bash
-ng serve
+src/app/
+├── agregar-producto/        # Componente para el registro de productos
+├── editar-producto/         # Componente para modificar productos existentes
+├── producto-lista/          # Componente principal (Dashboard, métricas y tabla de productos)
+├── app.component.html       # Estructura principal (Navbar Glassmorphic y Router Outlet)
+├── app.component.ts         # Lógica del core, persistencia del tema oscuro/claro
+├── app.config.ts            # Configuraciones globales de Angular (Providers, Router, etc.)
+├── app.routes.ts            # Definición del enrutamiento de la aplicación
+├── producto.service.ts      # Servicio de comunicación con la API REST (CRUD HTTP)
+└── producto.ts              # Modelo/Clase que define la estructura del Producto
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🚀 Guía de Inicio Rápido
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Sigue estos pasos para instalar y ejecutar el proyecto localmente.
+
+### 📋 Prerrequisitos
+
+Asegúrate de tener instalado en tu sistema:
+*   [Node.js](https://nodejs.org/) (Versión LTS recomendada)
+*   [Angular CLI](https://angular.dev/tools/cli) de manera global (opcional) o correr a través de `npx`.
+
+### 🔧 Instalación
+
+1.  **Clonar el repositorio:**
+    ```bash
+    git clone https://github.com/DanielAsDano/Sistema-de-inventarios-frontend-con-Angular.git
+    cd Sistema-de-inventarios-frontend-con-Angular
+    ```
+
+2.  **Instalar dependencias:**
+    ```bash
+    npm install
+    ```
+
+### 💻 Ejecutar en Entorno de Desarrollo
+
+Para iniciar un servidor de desarrollo local, ejecuta:
 
 ```bash
-ng generate component component-name
+npm run start
+# o alternativamente: ng serve
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Una vez que el servidor se haya iniciado, abre tu navegador favorito y navega a:
+👉 **`http://localhost:4200/`**
+
+La aplicación cuenta con *Hot Module Replacement (HMR)*, por lo que se recargará automáticamente cada vez que realices y guardes un cambio en el código fuente.
+
+---
+
+## 🔌 Conexión con el Backend
+
+El servicio Angular (`producto.service.ts`) se conecta de forma predeterminada al siguiente endpoint API REST:
+
+*   **URL Base de la API:** `http://localhost:8080/inventario-app/productos`
+
+> [!NOTE]
+> Para que el sistema funcione completamente, asegúrate de tener tu backend **Spring Boot** corriendo en el puerto `8080`. Si utilizas otro host o puerto, puedes ajustar la variable `urlBase` en `src/app/producto.service.ts`:
+> ```typescript
+> private urlBase = "http://localhost:8080/inventario-app/productos";
+> ```
+
+---
+
+## 📦 Compilación para Producción
+
+Para compilar el proyecto y generar los archivos optimizados para distribución/despliegue en producción, ejecuta:
 
 ```bash
-ng generate --help
+npm run build
+# o alternativamente: ng build
 ```
 
-## Building
+Esto compilará la aplicación y almacenará los artefactos de producción optimizados en el directorio `dist/inventario-app/`. Por defecto, Angular aplicará optimizaciones avanzadas de minificación de archivos, eliminación de código muerto (tree-shaking) y compilación anticipada (AoT) para garantizar el mejor rendimiento.
 
-To build the project run:
+---
+
+## 🧪 Pruebas Unitarias
+
+Para ejecutar las pruebas unitarias automatizadas con el ejecutor de pruebas [Karma](https://karma-runner.github.io):
 
 ```bash
-ng build
+npm run test
+# o alternativamente: ng test
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+## 🤝 Contribuciones
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Las contribuciones, reportes de bugs y sugerencias de mejora son más que bienvenidos. Si deseas colaborar:
+1. Haz un **Fork** del proyecto.
+2. Crea una rama con tu nueva funcionalidad (`git checkout -b feature/NuevaCaracteristica`).
+3. Guarda tus cambios (`git commit -am 'Añade una nueva característica'`).
+4. Sube la rama (`git push origin feature/NuevaCaracteristica`).
+5. Abre un **Pull Request**.
 
-```bash
-ng test
-```
+---
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Desarrollado con ❤️ para la gestión profesional de inventarios.
