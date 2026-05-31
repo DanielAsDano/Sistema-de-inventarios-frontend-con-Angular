@@ -2,11 +2,11 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Producto } from '../producto';
 import { ProductoService } from '../producto.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-agregar-producto',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './agregar-producto.component.html',
 })
 export class AgregarProductoComponent {

@@ -1,29 +1,77 @@
-<div class="container">
-    <div class="container text-center" style="margin: 30px;">
-        <h3>Agregar producto</h3>
+<div class="container fade-in-up mt-2">
+    <div class="row">
+        <div class="col-12 col-md-8 col-lg-6 mx-auto">
+            <div class="saas-card">
+                <!-- Encabezado del Formulario -->
+                <div class="text-center mb-4">
+                    <div class="bg-light rounded-circle d-inline-flex p-3 text-primary mb-3" style="border: 1px solid var(--border-color)">
+                        <i class="bi bi-plus-circle fs-3"></i>
+                    </div>
+                    <h3 class="fw-bold text-primary mb-1">Registrar Producto</h3>
+                    <p class="text-secondary small">Introduce los detalles del nuevo producto para añadirlo al inventario general.</p>
+                </div>
+
+                <!-- Formulario -->
+                <form (ngSubmit)="onSubmit()" #productoForm="ngForm">
+                    <div class="saas-form-group mb-3">
+                        <label for="descripcion" class="saas-label">
+                            <i class="bi bi-chat-left-text me-1 text-muted"></i> Descripción del producto
+                        </label>
+                        <input type="text" 
+                               class="saas-input" 
+                               id="descripcion" 
+                               name="descripcion" 
+                               placeholder="Ej: Teclado Mecánico RGB"
+                               required
+                               [(ngModel)]="producto.descripcion">
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-12 col-sm-6 mb-3 mb-sm-0">
+                            <div class="saas-form-group">
+                                <label for="precio" class="saas-label">
+                                    <i class="bi bi-currency-dollar me-1 text-muted"></i> Precio unitario
+                                </label>
+                                <input type="number" 
+                                       step="0.01" 
+                                       min="0"
+                                       class="saas-input" 
+                                       id="precio" 
+                                       name="precio" 
+                                       placeholder="0.00"
+                                       required
+                                       [(ngModel)]="producto.precio">
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6">
+                            <div class="saas-form-group">
+                                <label for="existencia" class="saas-label">
+                                    <i class="bi bi-boxes me-1 text-muted"></i> Existencias iniciales
+                                </label>
+                                <input type="number" 
+                                       min="0"
+                                       class="saas-input" 
+                                       id="existencia" 
+                                       name="existencia" 
+                                       placeholder="0"
+                                       required
+                                       [(ngModel)]="producto.existencia">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botones de Acción -->
+                    <div class="d-flex flex-column flex-sm-row justify-content-end gap-2 mt-4">
+                        <a routerLink="/productos" class="btn-saas btn-saas-secondary order-2 order-sm-1">
+                            <i class="bi bi-arrow-left"></i> Cancelar y Regresar
+                        </a>
+                        <button type="submit" class="btn-saas btn-saas-primary order-1 order-sm-2" [disabled]="!productoForm.form.valid">
+                            <i class="bi bi-check-circle-fill"></i> Registrar Producto
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-
-    <form (ngSubmit)="onSubmit()">
-        <div class="mb-3">
-            <label for="descripcion" class="form-label">Descripcion del producto</label>
-            <input type="text" class="form-control" id="descripcion" name="descripcion" [(ngModel)]="producto.descripcion">
-        </div>
-
-        <div class="mb-3">
-            <label for="precio" class="form-label">Precio</label>
-            <input type="number" step="anyone" class="form-control" id="precio" name="precio" [(ngModel)]="producto.precio">
-        </div>
-
-        <div class="mb-3">
-            <label for="exitencia" class="form-label">Existencia</label>
-            <input type="number" class="form-control" id="exitencia" name="existencia" [(ngModel)]="producto.existencia">
-        </div>
-
-
-        <div class="text-center">
-            <button type="submit" class="btn btn-primary btn-sm me-3">Agregar</button>
-            <a href="/" class="btn btn-danger btn-sm">Regresar</a>            
-        </div>
-    </form>
-
 </div>

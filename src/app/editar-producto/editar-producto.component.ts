@@ -1,13 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { Producto } from '../producto';
 import { ProductoService } from '../producto.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { routes } from '../app.routes';
 
 @Component({
   selector: 'app-editar-producto',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './editar-producto.component.html'
 })
 export class EditarProductoComponent {
